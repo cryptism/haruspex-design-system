@@ -10,8 +10,6 @@ export interface ChronicleEntryData {
 
 export interface ChronicleProps extends HTMLAttributes<HTMLDivElement> {
   entries: ChronicleEntryData[];
-  /** Shows a blinking text cursor after the last line, as if still being typed. */
-  live?: boolean;
 }
 
 /**
@@ -19,7 +17,7 @@ export interface ChronicleProps extends HTMLAttributes<HTMLDivElement> {
  * heretical-historian's step/query results directly: `meta` for the epoch,
  * `body` for the event's own prose.
  */
-export function Chronicle({ entries, live = false, className, ...rest }: ChronicleProps) {
+export function Chronicle({ entries, className, ...rest }: ChronicleProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -29,18 +27,12 @@ export function Chronicle({ entries, live = false, className, ...rest }: Chronic
 
   return (
     <div ref={scrollRef} className={[styles.chronicle, className].filter(Boolean).join(" ")} {...rest}>
-      {entries.map((e, i) => {
-        const isLast = i === entries.length - 1;
-        return (
-          <div key={e.id} className={styles.entry}>
-            {e.meta !== undefined && <span className={styles.entryMeta}>{e.meta}</span>}
-            <p className={styles.entryBody}>
-              {e.body}
-              {live && isLast && <span className={styles.cursor} aria-hidden="true" />}
-            </p>
-          </div>
-        );
-      })}
+      {entries.map((e) => (
+        <div key={e.id} className={styles.entry}>
+          {e.meta !== undefined && <span className={styles.entryMeta}>{e.meta}</span>}
+          <p className={styles.entryBody}>{e.body}</p>
+        </div>
+      ))}
     </div>
   );
 }

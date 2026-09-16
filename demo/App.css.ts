@@ -47,3 +47,9 @@ export const buttonRow = style({
   gap: "10px",
   marginTop: "4px",
 });
+
+export const formStack = style({
+  display: "flex",
+  flexDirection: "column",
+  gap: "14px",
+});

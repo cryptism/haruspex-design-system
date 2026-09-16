@@ -1,9 +1,9 @@
 {
   "name": "@haruspex/bevelry",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
   "type": "module",
-  "description": "Bevelry — monochrome, dithered-halftone GEM/desktop chrome. Track 02 of the Haruspex design system.",
+  "description": "Bevelry — monochrome, hauntological, dithered/halftone GEM/desktop chrome. Side B of the Haruspex design system.",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",

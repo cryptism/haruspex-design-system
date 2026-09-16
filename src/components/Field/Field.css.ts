@@ -10,12 +10,16 @@ export const row = style({
 });
 
 export const label = style({
-  fontFamily: fontFamily.body,
+  fontFamily: fontFamily.ui,
   fontSize: "9.5px",
   fontWeight: 700,
   letterSpacing: "0.12em",
   textTransform: "uppercase",
-  width: "64px",
+  // minWidth, not width: short labels ("SEED") still line up to a
+  // consistent column, but a longer one ("OFFICIANT") grows to fit its
+  // own text instead of clipping/overflowing into the field beside it.
+  minWidth: "64px",
+  whiteSpace: "nowrap",
   flex: "0 0 auto",
   textAlign: "right",
   color: vars.color.ink,
@@ -50,6 +54,62 @@ export const input = style([
     selectors: {
       "&::placeholder": { opacity: 0.5 },
       "&:focus-visible": { outline: `2px solid ${vars.color.ink}`, outlineOffset: "1px" },
+      "&:disabled": { cursor: "not-allowed", opacity: 0.5 },
     },
   },
 ]);
+
+export const textarea = style([
+  sunken,
+  {
+    flex: 1,
+    width: "100%",
+    padding: "6px 8px",
+    fontFamily: fontFamily.body,
+    fontSize: "13px",
+    fontWeight: 500,
+    lineHeight: 1.4,
+    color: vars.color.ink,
+    outline: "none",
+    resize: "vertical",
+    minHeight: "64px",
+    selectors: {
+      "&::placeholder": { opacity: 0.5 },
+      "&:focus-visible": { outline: `2px solid ${vars.color.ink}`, outlineOffset: "1px" },
+      "&:disabled": { cursor: "not-allowed", opacity: 0.5, resize: "none" },
+    },
+  },
+]);
+
+export const selectWrap = style({ position: "relative", flex: 1, display: "flex" });
+
+export const select = style([
+  sunken,
+  {
+    flex: 1,
+    width: "100%",
+    padding: "4px 26px 4px 8px",
+    fontFamily: fontFamily.ui,
+    fontSize: "13px",
+    fontWeight: 600,
+    color: vars.color.ink,
+    outline: "none",
+    appearance: "none",
+    cursor: "pointer",
+    selectors: {
+      "&:focus-visible": { outline: `2px solid ${vars.color.ink}`, outlineOffset: "1px" },
+      "&:disabled": { cursor: "not-allowed", opacity: 0.5 },
+    },
+  },
+]);
+
+export const selectChevron = style({
+  position: "absolute",
+  zIndex: 1,
+  right: "10px",
+  top: "50%",
+  transform: "translateY(-50%)",
+  pointerEvents: "none",
+  fontSize: "8px",
+  color: vars.color.ink,
+});

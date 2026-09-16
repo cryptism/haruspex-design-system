@@ -27,6 +27,13 @@ export const raisedShadow = style({
 /** Paper face + ink outline shared by every raised surface (dialog, button, field). */
 export const face = style({
   position: "relative",
+  // The browser default (content-box) adds padding+border ON TOP of a
+  // percentage/flex width instead of inside it — every component here
+  // that combines `width:100%`/`flex:1` with this face's padding+border
+  // (ListButton, TextArea, Select, …) was quietly wider than its own
+  // container as a result. Fixed once here since every bordered box in
+  // the system composes `face` (directly or via `sunken`).
+  boxSizing: "border-box",
   background: vars.color.paper,
   color: vars.color.ink,
   border: `2px solid ${vars.color.ink}`,
@@ -41,9 +48,11 @@ export const raisedChisel = style({
       inset: "3px",
       pointerEvents: "none",
       border: `1px solid ${vars.color.ink}`,
-      backgroundImage: `${vars.dither.d25}, ${vars.dither.d25}`,
+      // d12 (sparse), not d25 (dense) — d25 at this scale read as too
+      // heavy/distracting a texture for an edge detail.
+      backgroundImage: `${vars.dither.d12}, ${vars.dither.d12}`,
       backgroundPosition: "left bottom, right top",
-      backgroundSize: "3px 3px, 3px 3px",
+      backgroundSize: "4px 4px, 4px 4px",
       backgroundRepeat: "repeat-x, repeat-y",
     },
   },
@@ -72,4 +81,23 @@ export const sunken = style([
 export const ditherFill12 = style({
   backgroundImage: vars.dither.d12,
   backgroundSize: "4px 4px",
+});
+
+/**
+ * Visually hides a real `<input>` while keeping it in the tab order and
+ * mouse/touch hit area — the standard accessible-custom-control pattern.
+ * Used by Checkbox and Radio: the native input stays the actual form
+ * control (and the thing `:checked`/`:focus-visible` selectors target),
+ * a sibling span renders the visible diamond/square.
+ */
+export const visuallyHiddenInput = style({
+  position: "absolute",
+  width: "1px",
+  height: "1px",
+  margin: "-1px",
+  padding: 0,
+  overflow: "hidden",
+  whiteSpace: "nowrap",
+  clipPath: "inset(50%)",
+  border: 0,
 });

@@ -27,10 +27,13 @@ export const listButton = style([
 // The reverse-video hover flips the icon along with everything else.
 globalStyle(`${listButton}:hover svg`, { fill: vars.color.paper });
 
-export const text = style({ display: "flex", flexDirection: "column", gap: "2px" });
+// minWidth:0 overrides the flex default of refusing to shrink below content's
+// intrinsic width — without it, a long `value` (a URL, say) pushes the whole
+// button wider than its container instead of wrapping per overflowWrap:anywhere.
+export const text = style({ display: "flex", flexDirection: "column", gap: "2px", minWidth: 0 });
 
 export const kicker = style({
-  fontFamily: fontFamily.body,
+  fontFamily: fontFamily.ui,
   fontSize: "8px",
   fontWeight: 700,
   letterSpacing: "0.14em",

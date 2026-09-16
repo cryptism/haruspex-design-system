@@ -7,7 +7,7 @@ export const menubar = style([
   face,
   {
     display: "flex",
-    fontFamily: fontFamily.body,
+    fontFamily: fontFamily.ui,
     fontSize: "10.5px",
     fontWeight: 700,
     letterSpacing: "0.1em",
@@ -15,6 +15,13 @@ export const menubar = style([
 ]);
 
 export const item = style({
+  boxSizing: "border-box",
+  // Same class of bug as box-sizing: a <button> never inherits
+  // font-family/size/weight from an ancestor by default — it uses the
+  // browser's own UA font (Arial, on most systems) unless told
+  // otherwise. `menubar`'s font declarations on the container div never
+  // reached this button at all.
+  font: "inherit",
   padding: "6px 12px",
   borderRight: `2px solid ${vars.color.ink}`,
   background: "none",

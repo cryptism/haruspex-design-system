@@ -1,4 +1,4 @@
-import { keyframes, style } from "@vanilla-extract/css";
+import { style } from "@vanilla-extract/css";
 import { vars } from "../../tokens/theme.css";
 import { fontFamily } from "../../tokens/typography.css";
 import { sunken } from "../Bevel/Bevel.css";
@@ -45,25 +45,4 @@ export const entryBody = style({
   lineHeight: 1.4,
   color: vars.color.ink,
   margin: 0,
-});
-
-const blink = keyframes({
-  "0%, 49%": { opacity: 1 },
-  "50%, 100%": { opacity: 0 },
-});
-
-export const cursor = style({
-  display: "inline-block",
-  width: "0.55em",
-  height: "1em",
-  marginLeft: "2px",
-  verticalAlign: "text-bottom",
-  background: vars.color.ink,
-  animation: `${blink} 1s step-end infinite`,
-  "@media": {
-    "(prefers-reduced-motion: reduce)": {
-      animation: "none",
-      opacity: 1,
-    },
-  },
 });

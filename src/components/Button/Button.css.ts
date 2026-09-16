@@ -25,7 +25,7 @@ export const button = recipe({
       alignItems: "center",
       gap: "8px",
       padding: "7px 16px",
-      fontFamily: fontFamily.body,
+      fontFamily: fontFamily.ui,
       fontSize: "12px",
       fontWeight: 700,
       letterSpacing: "0.08em",

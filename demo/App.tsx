@@ -2,13 +2,25 @@ import { useState } from "react";
 import {
   type BevelryTheme,
   Button,
+  Checkbox,
   Chronicle,
   type ChronicleEntryData,
   Dialog,
   DisplayTitle,
+  Divider,
+  Fieldset,
+  Glyph,
   ListButton,
   Menubar,
+  Radio,
+  RadioGroup,
+  Select,
   StatRow,
+  Tab,
+  TabList,
+  TabPanel,
+  Tabs,
+  TextArea,
   TextInput,
   ThemeProvider,
 } from "../src";
@@ -41,7 +53,7 @@ export default function App() {
 
       <div className={styles.columns}>
         <div className={styles.stack}>
-          <Dialog title="SOCIETY.SYS" onMinimize={() => {}} onClose={() => {}}>
+          <Dialog title="SOCIETY.SYS">
             <div className={styles.dialogBody}>
               <StatRow label="Founded">Epoch 0, Cear Ferros</StatRow>
               <StatRow label="Doctrine">Measured Hymns</StatRow>
@@ -64,20 +76,51 @@ export default function App() {
           />
         </div>
 
-        <div className={styles.stack} style={{ width: "320px" }}>
-          <Chronicle entries={CHRONICLE} live />
-          <ListButton
-            as="a"
-            href="#"
-            kicker="ARCHIVE"
-            icon={
-              <svg viewBox="0 0 16 16">
-                <rect x="2" y="2" width="12" height="12" />
-              </svg>
-            }
-          >
-            View full chronicle →
-          </ListButton>
+        <div className={styles.stack} style={{ width: "340px" }}>
+          <Tabs defaultValue="rite">
+            <TabList>
+              <Tab value="rite">RITE</Tab>
+              <Tab value="members">MEMBERS</Tab>
+            </TabList>
+            <TabPanel value="rite">
+              <Fieldset legend="Rite of Induction">
+                <div className={styles.formStack}>
+                  <RadioGroup direction="column">
+                    <Radio value="vow" defaultChecked>
+                      Silent Vow
+                    </Radio>
+                    <Radio value="bell">Oath-Bell</Radio>
+                    <Radio value="hymn">Measured Hymn</Radio>
+                  </RadioGroup>
+                  <Select id="officiant" label="Officiant" defaultValue="ansellm">
+                    <option value="ansellm">Brother Ansellm</option>
+                    <option value="wren">Sister Wren</option>
+                    <option value="">Vacant</option>
+                  </Select>
+                  <Checkbox id="public" defaultChecked>
+                    Open to the public
+                  </Checkbox>
+                  <TextArea id="notes" label="Notes" placeholder="The candidate arrived at dusk…" rows={3} />
+                  <Divider />
+                  <div className={styles.buttonRow}>
+                    <Button emphasis="default">Record Rite</Button>
+                  </div>
+                </div>
+              </Fieldset>
+            </TabPanel>
+            <TabPanel value="members">
+              {/* No extra <Panel> here — TabPanel already renders its own bordered box; nesting one inside the other just doubled the border/padding. */}
+              <div className={styles.formStack}>
+                <Chronicle entries={CHRONICLE} />
+                <ListButton as="a" href="#" kicker="ARCHIVE">
+                  View full chronicle →
+                </ListButton>
+                <ListButton as="a" href="#" kicker="DISCORD" icon={<Glyph name="sun" size="17px" />}>
+                  discord.gg/the-silent-choir-of-cear-ferros
+                </ListButton>
+              </div>
+            </TabPanel>
+          </Tabs>
         </div>
       </div>
     </ThemeProvider>

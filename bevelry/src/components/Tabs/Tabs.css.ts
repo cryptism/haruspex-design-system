@@ -57,7 +57,13 @@ export const tab = recipe({
       },
       false: {
         selectors: {
-          "&:hover": { backgroundImage: "none", background: vars.color.ink, color: vars.color.paper },
+          "&:hover": { 
+            backgroundImage: "none", backgroundColor: vars.color.ink,
+            span: {
+              backgroundColor:vars.color.ink,
+              color:vars.color.paper
+            }
+          },
         },
       },
     },

@@ -2,6 +2,7 @@ import { globalStyle, style } from "@vanilla-extract/css";
 import { vars } from "../../tokens/theme.css";
 import { fontFamily } from "../../tokens/typography.css";
 import { face, raisedShadow } from "../Bevel/Bevel.css";
+import { iconBox } from "../IconBox/IconBox.css";
 
 export const listButton = style([
   face,
@@ -25,7 +26,9 @@ export const listButton = style([
 ]);
 
 // The reverse-video hover flips the icon along with everything else.
-globalStyle(`${listButton}:hover svg`, { fill: vars.color.paper });
+globalStyle(`${listButton}:hover svg`, { color: vars.color.paper });
+globalStyle(`${listButton}:hover ${iconBox}`, { borderColor: vars.color.paper });
+
 
 // minWidth:0 overrides the flex default of refusing to shrink below content's
 // intrinsic width — without it, a long `value` (a URL, say) pushes the whole
